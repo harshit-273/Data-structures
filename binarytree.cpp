@@ -74,6 +74,26 @@ void preorder(node *n1)
 		preorder(n1->rnode);
 	}
 }
+void inv_preorder(node *n1)
+{
+	if(n1==NULL)
+	{
+		cout<<"no data entered."<<endl;
+		return;
+	}
+	//traversing to left most
+	if((n1->rnode)!=NULL)
+	{
+		inv_preorder(n1->rnode);
+	}
+	//printing the data
+	cout<<(n1->data)<<" ";
+	//traversing to right
+	if((n1->lnode)!=NULL)
+	{
+		inv_preorder(n1->lnode);
+	}
+}
 void inorder(node *n1)
 {
 	if(n1==NULL)
@@ -111,6 +131,23 @@ void postorder(node *n1)
 	}
 	cout<<(n1->data)<<" ";
 }
+void inv_postorder(node *n1)
+{
+	if(n1==NULL)
+	{
+		cout<<"no data entered."<<endl;
+		return;
+	}
+	if((n1->rnode)!=NULL)
+	{
+		postorder(n1->rnode);
+	}
+	if((n1->lnode)!=NULL)
+	{
+		postorder(n1->lnode);
+	}
+	cout<<(n1->data)<<" ";
+}
 int main()
 {
     int select;
@@ -118,13 +155,15 @@ int main()
     {
 	    cout<<"\nSelect from the following:"<<endl;
 	    cout<<"1-Enter new data"<<endl;
-	    cout<<"2-Show the tree in sorted(preorder) order"<<endl;
-	    cout<<"3-Show the whole tree"<<endl;
-	    cout<<"4-Delete data"<<endl;
-	    cout<<"5-Update data"<<endl;
-        cout<<"6-Show tree in inorder"<<endl;
-        cout<<"7-Show tree in postorder"<<endl;
-        cout<<"8-Show tree in levelorder"<<endl;
+	    cout<<"2-Show the tree in ascending(preorder)  sorted order"<<endl;
+	    cout<<"3-Show the tree in descending(inverse preorder) sorted order"<<endl;
+	    cout<<"4-Show tree in inorder"<<endl;
+	    cout<<"5-Show tree in postorder"<<endl;
+	    cout<<"6-Show tree in inverse postorder"<<endl;
+		/*cout<<"-Show the whole tree"<<endl;
+	    cout<<"-Delete data"<<endl;
+	    cout<<"-Update data"<<endl;
+        cout<<"-Show tree in levelorder"<<endl;*/
 	    cout<<"Press Any Other Key-Exit"<<endl;
 	    cin>>select;
 	    switch(select)
@@ -136,22 +175,16 @@ int main()
 	        	preorder(start);
 	            break;
 	        case 3:
-                cout<<"sorry, not available"<<endl;
+                inv_preorder(start);
 	            break;
 	        case 4:
-                cout<<"sorry, not available"<<endl;
-	            break;
-	        case 5:
-                cout<<"sorry, not available"<<endl;
-	            break;
-            case 6:
                 inorder(start);
 	            break;
-            case 7:
+	        case 5:
                 postorder(start);
 	            break;
-            case 8:
-                cout<<"sorry, not available"<<endl;
+            case 6:
+                inv_postorder(start);
 	            break;
 	        default:
 	            cout<<"\n\tThank you User,\n\t\tVisit us again."<<endl;
