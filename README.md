@@ -1,3 +1,3 @@
 # harshit
 
-Someof the functionalities are still in progress
+Some of the functionalities are still in progress
