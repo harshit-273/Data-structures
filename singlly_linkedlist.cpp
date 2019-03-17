@@ -60,6 +60,7 @@ void remove_begin()
 	nnode=start;
 	start=start->next;
 	free(nnode);
+	return;
 }
 void remove_end()
 {
@@ -153,6 +154,39 @@ void remove_spec()
 	free(nnode);
 	return;
 }
+void remove_spec_node()
+{
+	int num;
+	if(start==NULL)
+	{
+		cout<<"Sorry, can't perform this action as list is empty'"<<endl;
+		return;
+	}
+	cout<<"Enter the value of data in the node:";
+	cin>>num;
+	ptr=start;
+	if(num==start->data)
+	{
+		remove_begin();
+	}
+	while(ptr->next!=NULL)
+	{
+		if(ptr->next->data==num)
+		{
+			node *nnode;
+			nnode=ptr->next;
+			ptr->next=ptr->next->next;
+			free(nnode);
+			cout<<"node removed with data "<<num<<endl;
+			return;
+		}
+		else
+		{
+			ptr=ptr->next;
+		}
+	}
+	return;
+}
 void print_list()
 {
 	ptr=start;
@@ -169,10 +203,33 @@ void print_list()
 		}
 		cout<<ptr->data<<endl<<endl;
 	}
+	return;
+}
+void search_node(int num)
+{
+	ptr=start;
+	if(ptr==NULL)
+	{
+		cout<<"\nList is empty."<<endl;
+	}
+	else
+	{
+		while((ptr->next)!=NULL)
+		{
+			if(ptr->data==num)
+			{
+				cout<<"Data Found."<<endl<<endl;
+				return;
+			}
+			ptr=ptr->next;
+		}
+		cout<<"Sorry, Data not found."<<endl<<endl;
+	}
+	return;
 }
 void print_reverse(node *node2)
 {
-	if(node2==NULL)
+	if(start==NULL)
 	{
 		cout<<"\nList is empty."<<endl;
 	}
@@ -196,57 +253,62 @@ int main()
 	char choice;
 	while(1)
 	{
-		cout<<"Hello, Harshit."<<endl<<"Here are the choices for you:\n\n";
-		cout<<"1-Enter the node at begin.\n";
-		cout<<"2-Enter the node at end.\n";
-		cout<<"3-Remove the node from begin.\n";
-		cout<<"4-Remove the node from end.\n";
-		cout<<"5-Enter the node at specified position.\n";
-		cout<<"6-Remove the node from specified position.\n";
-		/*cout<<"7-Remove the specified node.\n";*/
-		cout<<"8-Print the link-list.\n";
-		cout<<"9-Print the link-list in reverse order.\n";
+		cout<<"Hello!"<<endl<<"Here are the choices for you:\n\n";
+		cout<<"a-Enter the node at begin.\n";
+		cout<<"b-Enter the node at end.\n";
+		cout<<"c-Remove the node from begin.\n";
+		cout<<"d-Remove the node from end.\n";
+		cout<<"e-Enter the node at specified position.\n";
+		cout<<"f-Remove the node from specified position.\n";
+		cout<<"g-Remove the specified node.\n";
+		cout<<"h-Print the link-list.\n";
+		cout<<"i-Print the link-list in reverse order.\n";
+		cout<<"j-Search for Data.\n";
 		cout<<"q-To quit this session.\n";
 		cin>>choice;
 		switch(choice)
 		{
-			case '1':
+			case 'a':
 				create_begin();
 				break;
-			case '2':
+			case 'b':
 				create_end();
 				break;
-			case '3':
+			case 'c':
 				remove_begin();
 				break;
-			case '4':
+			case 'd':
 				remove_end();
 				break;
-			case '5':
+			case 'e':
 				enter_spec();
 				break;
-			case '6':
+			case 'f':
 				remove_spec();
 				break;
-			case '8':
+			case 'g':
+				remove_spec_node();
+				break;
+			case 'h':
 				print_list();
 				break;
-			case '9':
+			case 'i':
 				print_reverse(start);
 				break;
+			case 'j':
+				int num;
+				cout<<"Enter the data you want to search for:";
+				cin>>num;
+				search_node(num);
+				break;
 			case 'q':
-				flag=1;
-				goto quit;
+				cout<<"Thank you for trying this here,\n\t\t\t\tcome back soon.\n\nPress the cross icon above dumbo.";
 				break;
 			default:
 				cout<<"\nPlease enter the correct choice\n";
-		}
-		quit:
-			if(flag==1)
-			{
 				break;
-			}
+		}
 	}	
-	cout<<"Thank you Harshit for working here,\n\t\t\t\tcome back soon.\n\nPress the cross icon above dumbo.";
+	
 	return (0);
 }

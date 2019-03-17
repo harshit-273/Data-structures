@@ -131,6 +131,7 @@ void postorder(node *n1)
 	}
 	cout<<(n1->data)<<" ";
 }
+/*prints in order of right-left-root*/
 void inv_postorder(node *n1)
 {
 	if(n1==NULL)
@@ -148,6 +149,35 @@ void inv_postorder(node *n1)
 	}
 	cout<<(n1->data)<<" ";
 }
+/*still working on it*/
+void search(node *n1,int num)
+{
+	if(start==NULL)
+	{
+		cout<<"Please, Enter the data."<<endl;
+	}
+	if(n1==NULL)
+	{
+		cout<<"Data not found."<<endl;
+		return;
+	}
+	else if(n1->data==num)
+	{
+		cout<<n1->data<<" data found."<<endl;
+	}
+	else
+	{
+		cout<<n1->data<<" ";
+		if((n1->data)<num)
+		{
+			search(n1->rnode,num);
+		}
+		else
+		{
+			search(n1->lnode,num);
+		}
+	}
+}
 int main()
 {
     int select;
@@ -160,6 +190,7 @@ int main()
 	    cout<<"4-Show tree in inorder"<<endl;
 	    cout<<"5-Show tree in postorder"<<endl;
 	    cout<<"6-Show tree in inverse postorder"<<endl;
+	    cout<<"7-Search for the node"<<endl;
 		/*cout<<"-Show the whole tree"<<endl;
 	    cout<<"-Delete data"<<endl;
 	    cout<<"-Update data"<<endl;
@@ -186,6 +217,12 @@ int main()
             case 6:
                 inv_postorder(start);
 	            break;
+	        case 7:
+	        	int num;
+				cout<<"\nPlease enter the number:";
+				cin>>num;
+	        	search(start,num);
+	        	break;
 	        default:
 	            cout<<"\n\tThank you User,\n\t\tVisit us again."<<endl;
 	            exit(0);
